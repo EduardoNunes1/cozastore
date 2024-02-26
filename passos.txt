@@ -1,0 +1,6 @@
+configurar o git local
+git config --global user.name AninhaMel
+git config --global user.email ana.silva5134@etec.sp.gov.br
+
+criar o projeto
+dotnet new mvc  -o Cozastore
