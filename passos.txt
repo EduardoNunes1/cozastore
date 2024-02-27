@@ -1,6 +1,6 @@
 configurar o git local
 git config --global user.name EduardoNunes1
-git config --global user.email eduardonnunes8349@gmail.com
+git config --global user.email eduardonunes8349@gmail.com
 
 criar o projeto
 dotnet new mvc  -o Cozastore
