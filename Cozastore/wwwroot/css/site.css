@@ -23,3 +23,6 @@ body {
   margin-bottom: 60px;
 }
 
+.navbar-nav{
+  gap: 5%;
+}
