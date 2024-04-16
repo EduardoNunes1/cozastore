@@ -1,62 +1,96 @@
 @model IEnumerable<Cozastore.Models.Categoria>
-
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Categorias";
+	Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Categorias</h1>
+<div class="row">
+	<div class="col-12">
+		<div class="card my-4">
+			<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div
+                    class="bg-gradient-warning shadow-primary border-radius-lg py-4 d-flex justify-content-between align-items-center">
+                    <h5 class="text-white text-capitalize m-0 ps-3">@ViewData["Title"]</h5>
+                    <a class="text-white text-capitalize ps-3 align-items-center d-flex me-4" asp-action="Create">
+                        <i class="material-icons opacity-10 me-2">add</i> Adicionar
+                    </a>
+                </div>
+            </div>
+			<div class="card-body pb-2">
+				<div class="table-responsive p-0">
+					<table id='DataTable' class="table table-striped align-items-center mb-0 w-100">
+						<thead>
+							<tr>
+								<th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+									@Html.DisplayNameFor(model => model.Nome)
+								</th>
+								<th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+									@Html.DisplayNameFor(model => model.CategoriaMae)
+								</th>
+								<th
+									class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+									Filtro</th>
+								<th
+									class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+									Banner</th>
+								<th
+									class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+									Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model)
+							{
+								<tr>
+									<td class="text-dark text-sm ps-4">
+										@Html.DisplayFor(modelItem => item.Nome)
+									</td>
+									<td class="text-dark text-sm ps-4">
+										@Html.DisplayFor(modelItem => item.CategoriaMae.Nome)
+									</td>
+									<td class="align-middle text-center text-sm">
+										<span class='badge badge-sm bg-gradient-@(item.Filtrar? "success" : "secondary")'>
+											@(item.Filtrar ? "Sim" : "Não")
+										</span>
+									</td>
+									<td class="align-middle text-center text-sm">
+										<span class='badge badge-sm bg-gradient-@(item.Banner? "success" : "secondary")'>
+											@(item.Banner ? "Sim" : "Não")
+										</span>
+									</td>
+									<td class="align-middle text-center">
+										<a asp-action="Edit" asp-route-id="@item.Id" title="Alterar">
+											<i class="material-icons">edit</i>
+										</a>
+										<a asp-action="Details" asp-route-id="@item.Id" title="Detalhes">
+											<i class="material-icons">search</i>
+										</a>
+										<a asp-action="Delete" asp-route-id="@item.Id" title="Excluir">
+											<i class="material-icons">delete</i>
+										</a>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary my-3 ">
-        adicionar
-        <i class="bi bi-plus"></i>
-    </a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Foto)
-            </th>
-            <th>
-               Filtro
-            </th>
-            <th>
-                Banner
-            </th>
-            <th>
-                Categoria
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Foto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Filtrar)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Banner)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoriaMae.Nome)
-            </td>
-            <td >
-                <a asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square px-md-2 text-warning"></i></a> |
-                <a asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-card-text px-md-2"></i></a> |
-                <a asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash text-danger px-md-2"></i></a>
-            </td>
-        </tr>
+@section Scripts {
+    <script>
+        let datatable = new DataTable('#DataTable', {
+            language: {
+                url: '../../lib/datatable/language.json'
+            },
+            initComplete: function (settings, json) {
+                document.querySelector('.dt-length').classList.add('text-xs');
+                document.querySelector('.dt-search').classList.add('text-xs');
+                document.querySelector('.dt-info').classList.add('text-xs');
+                document.querySelector('.dt-paging').classList.add('text-xs');
+            }
+        });
+    </script>
 }
-    </tbody>
-</table>

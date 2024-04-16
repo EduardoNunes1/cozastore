@@ -1,12 +1,11 @@
 @model Cozastore.Models.Categoria
-
 @{
-    ViewData["Title"] = "Categoria";
+    ViewData["Title"] = "Categorias";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Criar</h1>
-
-<h4>Categoria</h4>
+<h1>Categoria</h1>
+<h4>Adicionar</h4>
 <hr />
 <div class="row">
     <div class="col-md-4 mx-auto">
@@ -17,7 +16,6 @@
                 <input asp-for="Nome" class="form-control" />
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
-
             <div class="form-group form-check mb-3">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Filtrar" /> @Html.DisplayNameFor(model => model.Filtrar)
@@ -29,17 +27,17 @@
                 </label>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="CategoriaMaeId" class="control-label"></label>
-                <select asp-for="CategoriaMaeId" class="form-select" asp-items="ViewBag.CategoriaMaeId">
+                <label asp-for="CategoriaMaeId" class="form-label"></label>
+                <select asp-for="CategoriaMaeId" class ="form-select" asp-items="ViewBag.CategoriaMaeId">
                     <option value="">Selecione uma Categoria Mãe</option>
                 </select>
             </div>
             <div class="form-group mb-3">
                 <label asp-for="Foto" class="control-label"></label>
-                <img id="Preview" class="img-fluid w-100">
+                <img id="Preview" class="img-fluid w-100" />
                 <input type="file" asp-for="Foto" class="form-control" accept=".jpg,.jpeg,.png,.gif,.jfif" />
             </div>
-            <div class="form-group mb-3">
+            <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
@@ -47,19 +45,21 @@
 </div>
 
 <div>
-    <a asp-action="Index" class="btn btn-danger">Sair</a>
+    <a asp-action="Index">Voltar a listagem</a>
 </div>
 
 @section Scripts {
     <script>
         window.addEventListener('load', function() {
             document.querySelector('input[type=file]')
-                .addEventListener('change', function () {
-                    if (this.files && this.files[0]) {
-                        var img = document.getElementById('Preview');
-                        img.src = URL.createObjectURL(this.files[0]);
-                    }
-                });
+            .addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    var img = document.getElementById('Preview');
+                    img.src = URL.createObjectURL(this.files[0]);
+                }
             });
+        });
+
     </script>
 }
+

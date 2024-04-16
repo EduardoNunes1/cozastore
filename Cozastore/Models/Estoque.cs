@@ -12,7 +12,7 @@ public class Estoque
 
     [Display(Name = "ProdutoId")]
     [Required(ErrorMessage = "Por favor, informe o Produto")]
-    public int ProtudoId { get; set; }
+    public int ProdutoId { get; set; }
     [ForeignKey("ProdutoId")]
     public Produto Produto { get; set; }
 
