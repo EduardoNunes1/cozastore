@@ -1,0 +1,27 @@
+@model Cozastore.ViewModels.LoginVM
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form asp-action="Login" method="POST">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Senha" class="form-label"></label>
+        <input asp-for="Senha" class="form-control">
+        <span asp-validation-for="Senha" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" asp-for="Lembrar">
+        <label class="form-check-label" asp-for="Lembrar"></label>
+    </div>
+    <input type="hidden" asp-for="UrlRetorno">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
