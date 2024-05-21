@@ -1,0 +1,14 @@
+@using System.Security.Claims
+@inject Cozastore.Data.AppDbContext _context;
+@{
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var user = _context.Usuarios.Find(userId);
+    var foto = user != null ? user.Foto ?? Url.Content("~/img/usuarios/no-photo.jpg") : Url.Content("~/img/usuarios/no-photo.jpg");
+}
+
+<li class="nav-item d-flex align-items-center">
+    <a asp-controller="Admin" asp-action="Profile" class="nav-link text-body font-weight-bold px-0">
+        <img class="img-fluid rounded-circle mx-1 mb-1" src="@foto" width="32" height="28">
+        <span class="d-sm-inline d-none">@(user != null ? user.Nome : "Usuário")</span>
+    </a>
+</li>
